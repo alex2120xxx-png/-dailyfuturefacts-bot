@@ -16,15 +16,15 @@ def generate_fact():
         "messages": [
             {
                 "role": "system",
-                "content": "Ты интересный рассказчик. Придумай один короткий, увлекательный и правдоподобный факт о будущем технологий, науки или жизни людей. Пиши только на русском языке. Только сам факт, без вступлений и пояснений."
+                "content": "Ты опытный бизнес-аналитик и предприниматель. Придумай один короткий, практичный и интересный факт или инсайт о бизнесе, стартапах, деньгах, маркетинге, продажах, будущем предпринимательства или технологиях в бизнесе. Пиши только на русском языке. Стиль — живой, полезный, без воды и вступлений. Только сам факт или инсайт."
             },
             {
                 "role": "user",
-                "content": "Сгенерируй один интересный факт о будущем"
+                "content": "Сгенерируй один полезный бизнес-инсайт или факт"
             }
         ],
         "temperature": 0.85,
-        "max_tokens": 250
+        "max_tokens": 320
     }
     
     response = requests.post(url, headers=headers, json=data, timeout=30)
@@ -35,7 +35,7 @@ def send_to_telegram(text):
     url = f"https://api.telegram.org/bot{TELEGRAM_BOT_TOKEN}/sendMessage"
     payload = {
         "chat_id": TELEGRAM_CHAT_ID,
-        "text": f"🚀 <b>Факт о будущем</b>\n\n{text}",
+        "text": f"💼 <b>Бизнес-инсайт</b>\n\n{text}",
         "parse_mode": "HTML"
     }
     response = requests.post(url, json=payload, timeout=15)
@@ -44,4 +44,4 @@ def send_to_telegram(text):
 if __name__ == "__main__":
     fact = generate_fact()
     send_to_telegram(fact)
-    print("Факт успешно опубликован!")
+    print("Бизнес-инсайт успешно опубликован!")
